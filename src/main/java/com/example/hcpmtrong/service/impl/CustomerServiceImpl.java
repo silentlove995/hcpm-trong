@@ -7,10 +7,14 @@ import com.example.hcpmtrong.dto.CustomerDTO;
 import com.example.hcpmtrong.entity.Customer;
 import com.example.hcpmtrong.repository.CustomerRepository;
 import com.example.hcpmtrong.service.CustomerService;
+import com.example.hcpmtrong.utils.FormUtil;
+import com.example.hcpmtrong.utils.response.PageList;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,20 +68,20 @@ public class CustomerServiceImpl implements CustomerService {
 		return dtos;
 	}
 
-//	@Override
-//	public PageList<CustomerDTO> findAll(Map<String, String> model) {
-//		Pageable pageable = FormUtil.toPageable(model);
-//		List<Customer> customers = customerRepository.findAll(pageable).getContent();
-//		long count = customerRepository.count();
-//		return PageList.<CustomerDTO>builder()
-//			.list(Converter.toList(customers, CustomerDTO.class))
-//			.currentPage(pageable.getPageNumber() + 1)
-//			.total(count)
-//			.pageSize(pageable.getPageSize())
-//			.success(true)
-//			.totalPage((int) Math.ceil((double) Integer.parseInt(Long.toString(count)) / pageable.getPageSize()))
-//			.build();
-//	}
+	@Override
+	public PageList<CustomerDTO> findAllPageable(Map<String, String> model) {
+		Pageable pageable = FormUtil.toPageable(model);
+		List<Customer> customers = customerRepository.findAll(pageable).getContent();
+		long count = customerRepository.count();
+		return PageList.<CustomerDTO>builder()
+			.list(Converter.toList(customers, CustomerDTO.class))
+			.currentPage(pageable.getPageNumber() + 1)
+			.total(count)
+			.pageSize(pageable.getPageSize())
+			.success(true)
+			.totalPage((int) Math.ceil((double) Integer.parseInt(Long.toString(count)) / pageable.getPageSize()))
+			.build();
+	}
 
 
 }

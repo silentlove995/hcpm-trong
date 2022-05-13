@@ -16,4 +16,6 @@ public class AccountDTO extends AbstractDTO {
 	private String username;
 	private String password;
 	private Status status;
+	private Long roleId;
+
 }

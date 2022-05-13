@@ -2,7 +2,9 @@ package com.example.hcpmtrong.service;
 
 
 import com.example.hcpmtrong.dto.CustomerDTO;
+import com.example.hcpmtrong.utils.response.PageList;
 import java.util.List;
+import java.util.Map;
 
 public interface CustomerService {
 
@@ -14,7 +16,7 @@ public interface CustomerService {
 
 	void delete(Long id);
 
-	//	PageList<CustomerDTO> findAll(Map<String, String> model);
+	PageList<CustomerDTO> findAllPageable(Map<String, String> model);
 	List<CustomerDTO> findAll();
 
 }
